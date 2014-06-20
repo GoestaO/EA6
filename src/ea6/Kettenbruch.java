@@ -46,6 +46,27 @@ public class Kettenbruch {
 
     }
 
+    private double werteRekursivAus(int i) {
+
+        // Zwischenergebnis in double-Variable wegspeichern
+        double ze = 0;
+        if (i <= 0) {
+            return 0;
+        }
+        if (i > 0) {
+            ze = 1 / (werte[werte.length - i] + werteRekursivAus(i - 1));
+        }
+
+        if (i == 1 && ze != 0) {
+            ze = 1 / ze + werte[werte.length - 1];
+        }
+        return ze;
+    }
+
+    public double werteRekursivAus() {
+        return werteRekursivAus(werte.length);
+
+    }
 //    public static double approximiereWurzel2(int n) {
 //
 //    }
