@@ -12,8 +12,8 @@ package ea6;
 public class Main {
 
     public static void main(String[] args) {
-        
-        Kettenbruch k = new Kettenbruch(new int[]{2,4,2,4});
-//        System.out.println("k = " + k.werteRekursivAus());
+
+        Kettenbruch k = new Kettenbruch(new int[]{1, 4, 2, 4});
+        System.out.println("k = " + k.werteRekursivAus());
     }
 }

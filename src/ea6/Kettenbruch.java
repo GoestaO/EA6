@@ -32,7 +32,7 @@ public class Kettenbruch {
 
         if (werte.length > 0) {
 
-            // Der Zwischenwerte hat initial den letzten Wert im Werte-Array
+            // Der Zwischenwert hat initial den letzten Wert im Werte-Array
             double zwischenwert = werte[werte.length - 1];
 
             // Schleife von "rechts" nach "links" durch das Werte-Array
@@ -46,41 +46,70 @@ public class Kettenbruch {
 
     }
 
-    private double werteRekursivAus(int i) {
+    private double werteRekursivAus(int n) {
 
-        // Zwischenergebnis in double-Variable wegspeichern
-        double ze = 0;
-        if (i <= 0) {
+        // zwischenwert in double-Variable wegspeichern
+        double zwischenwert = 0;
+
+        // Basisfall
+        if (n <= 0) {
             return 0;
         }
-        if (i > 0) {
-            ze = 1 / (werte[werte.length - i] + werteRekursivAus(i - 1));
+
+        // Fall I
+        if (n > 0) {
+            zwischenwert = 1 / (werteRekursivAus(n - 1)) + werte[werte.length - n];
         }
 
-        if (i == 1 && ze != 0) {
-            ze = 1 / ze + werte[werte.length - 1];
+        // Fall II
+        if (n == 1) {
+            zwischenwert = 1 / zwischenwert + werte[werte.length - 1];
         }
-        return ze;
+        return zwischenwert;
     }
 
     public double werteRekursivAus() {
         return werteRekursivAus(werte.length);
 
     }
-//    public static double approximiereWurzel2(int n) {
-//
-//    }
-//
-//    public static double approximiereE(int n) {
-//
-//    }
-//
-//    public static int[] berechneWurzel2Folge(int n) {
-//
-//    }
-//
-//    public static int[] berechneEFolge(int n) {
-//
-//    }
-    // hier ist Platz für Hilfsmethoden
+
+    public static double approximiereWurzel2(int n) {
+
+        Kettenbruch wurzelbruch = new Kettenbruch(Kettenbruch.berechneWurzel2Folge(n));
+
+        return wurzelbruch.werteRekursivAus();
+
+    }
+
+    public static double approximiereE(int n) {
+        Kettenbruch euler = new Kettenbruch(Kettenbruch.berechneEFolge(n));
+        return euler.werteRekursivAus();
+    }
+
+    public static int[] berechneWurzel2Folge(int n) {
+
+        int[] array = new int[n];
+        array[0] = 1;
+        for (int i = 1; i < n; i++) {
+            array[i] = 2;
+        }
+        return array;
+    }
+
+    public static int[] berechneEFolge(int n) {
+
+        int[] array = new int[n];
+        int basiswert = 2;
+        array[0] = 2;
+        for (int i = 1; i < n; i++) {
+            if ((i + 1) % 3 == 0) {
+                array[i] = basiswert;
+                basiswert = basiswert + 2;
+            } else {
+                array[i] = 1;
+            }
+        }
+        return array;
+    }
+
 }
