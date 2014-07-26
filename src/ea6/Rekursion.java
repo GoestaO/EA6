@@ -9,12 +9,16 @@ package ea6;
  *
  * @author goesta
  */
-public class Main {
+public class Rekursion {
 
-    public static void main(String[] args) {
-        Rekursion r = new Rekursion();
-        r.a(6, 3);
+    public int a(int x, int y) {
         
+        if (x <= 0 || y < 0) {
+            return x - y + 2;
+        }
+        if (x % 2 == 0) {
+            return a(x / 2, y) + a(x, y - 1);
+        }
+        return a(x - 1, y - 2);
     }
-
 }
